@@ -22,7 +22,6 @@ This script is very simple and works in most cases to detect errors in the DNSSE
 It could use the following:
 
  - Base the check on python-nagios
- - Configurable location for the root trust anchor
  - Checking the signatures from all nameservers in the final NSSet
  - Checking all signatures from all nameservers (might be slow/expensive and not nice to TLD/root operators)
  - Stop relying on python-unbound (as it is not generally available on e.. Arch) and use dnspython

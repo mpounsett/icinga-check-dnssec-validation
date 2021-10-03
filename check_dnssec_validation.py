@@ -33,7 +33,7 @@ def parse_args(args=None):
             "This script tests the zone for validation failures by looking "
             "up the SOA record. This script is meant to be invoked by "
             "nagios/icinga."
-        )
+        ),
     )
     parser.add_argument(
         "--zone", "-z",
@@ -50,6 +50,15 @@ def parse_args(args=None):
             "When the result of the check is insecure, the state is "
             "OK and not WARNING."
         ),
+    )
+    parser.add_argument(
+        "--trust-anchor-file",
+        metavar='PATH',
+        help=(
+            "Pick alternate path to trust anchor file "
+            "(default: /var/lib/icinga2/root.key)"
+        ),
+        default='/var/lib/icinga2/root.key',
     )
 
     return parser.parse_args(args)
@@ -74,7 +83,7 @@ def main():
     ctx = unbound.ub_ctx()
 
     # This key-file should be created once using unbound-anchor(8)
-    ctx.set_option('auto-trust-anchor-file:', '/var/lib/icinga2/root.key')
+    ctx.set_option('auto-trust-anchor-file:', args.trust_anchor_file)
 
     status, result = ctx.resolve(args.zone, rrtype=unbound.RR_TYPE_SOA)
 
