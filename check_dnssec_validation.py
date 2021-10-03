@@ -35,10 +35,23 @@ def parse_args(args=None):
             "nagios/icinga."
         )
     )
-    parser.add_argument("--zone", "-z", action="store", metavar='ZONE',
-                        help="The zone to be checked")
-    parser.add_argument("--insecure-is-ok", action="store_true",
-                        dest="insecureOK")
+    parser.add_argument(
+        "--zone", "-z",
+        action="store",
+        metavar='ZONE',
+        help="The zone to be checked",
+        required=True,
+    )
+    parser.add_argument(
+        "--insecure-is-ok",
+        action="store_true",
+        dest="insecureOK",
+        help=(
+            "When the result of the check is insecure, the state is "
+            "OK and not WARNING."
+        ),
+    )
+
     return parser.parse_args(args)
 
 
